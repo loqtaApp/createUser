@@ -12,7 +12,7 @@ require __DIR__.'/vendor/autoload.php';
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Auth;
-$data = json_decode(file_get_contents('php://input'),true);
+$data = json_decode(json_decode(file_get_contents('php://input'),true),true);
 
 
 $mainURL = "https://f3aa0d6659405ab34f9c0af85d0f2ef9:590b142f0e9922bd187703cd6729bae8@loqta-ps.myshopify.com/admin/customers/".$data['customer']['id']."/metafields.json";
