@@ -14,12 +14,12 @@ use Kreait\Firebase\ServiceAccount;
 use Kreait\Auth;
 $data = json_decode(file_get_contents('php://input'),true);
 
-
+/*
 $mainURL = "https://f3aa0d6659405ab34f9c0af85d0f2ef9:590b142f0e9922bd187703cd6729bae8@loqta-ps.myshopify.com/admin/customers/".$data['id']."/metafields.json";
 
 /***
  * initliaze request
- */
+
 $headers = array(
 	'Content-Type:application/json'
 );
@@ -36,7 +36,7 @@ if($result == NULL){
 }else {
 	$passoerd = $result['metafields'][0]['value'];
 }
-
+*/
 $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/google-services.json');
 
 $firebase = (new Factory)
@@ -45,7 +45,7 @@ $firebase = (new Factory)
 
 $auth = $firebase->getAuth();
 try{
-  $users = $auth->createUserWithEmailAndPassword($data['email'], $passoerd);
+  $users = $auth->createUserWithEmailAndPassword($data['email'], "012012");
   echo "true";
 }catch(Exception $e){
   echo $e;
