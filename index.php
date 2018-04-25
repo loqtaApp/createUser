@@ -30,7 +30,6 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = json_decode(curl_exec($ch),true);
-var_dump($result);
 
 
 
@@ -42,7 +41,7 @@ $firebase = (new Factory)
 
 $auth = $firebase->getAuth();
 try{
-  $users = $auth->createUserWithEmailAndPassword($data['customer']['email'], $result['metafields']['value']);
+  $users = $auth->createUserWithEmailAndPassword($data['customer']['email'], $result['metafields'][0]['value']);
   echo "true";
 }catch(Exception $e){
   echo $e;
