@@ -13,7 +13,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Auth;
 $data = json_decode(json_decode(file_get_contents('php://input'),true),true);
-var_dump($data);
+
 
 $mainURL = "https://f3aa0d6659405ab34f9c0af85d0f2ef9:590b142f0e9922bd187703cd6729bae8@loqta-ps.myshopify.com/admin/customers/".$data['customer']['id']."/metafields.json";
 
@@ -29,8 +29,8 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-$result = curl_exec($ch);
-
+$result = json_decode(curl_exec($ch),true);
+var_dump($result);
 
 
 
