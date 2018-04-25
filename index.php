@@ -47,7 +47,12 @@ $firebase = (new Factory)
 
 $auth = $firebase->getAuth();
 try{
-  $users = $auth->createUserWithEmailAndPassword($data['email'], "012012");
+  $users = $auth->createUserWithEmailAndPassword($data['email'], $passoerd);
+	$auth->getApiClient()->request('setAccountInfo', [
+      'localId' => $users->uid,
+      'displayName' => $data['first_name'] +" "+$data['last_name'],
+			'phoneNumber' => $data['phone']
+  ]);
   echo "true";
 }catch(Exception $e){
   echo $e;

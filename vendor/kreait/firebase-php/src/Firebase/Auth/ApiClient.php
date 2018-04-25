@@ -161,7 +161,7 @@ class ApiClient
         ]);
     }
 
-    private function request(string $uri, array $data): ResponseInterface
+    public function request(string $uri, array $data): ResponseInterface
     {
         try {
             return $this->client->request('POST', $uri, ['json' => $data]);

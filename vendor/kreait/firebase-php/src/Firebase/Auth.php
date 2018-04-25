@@ -50,6 +50,27 @@ class Auth
     }
 
     /**
+ * Updates the given user with the given properties.
+ *
+ * @param mixed|Uid $uid
+ * @param array|Request\UpdateUser $properties
+ *
+ * @throws InvalidArgumentException if invalid properties have been provided
+ *
+ * @return UserRecord
+ */
+public function updateUser($uid, $properties): UserRecord
+{
+    $request = $properties instanceof Request\UpdateUser
+        ? $properties
+        : Request\UpdateUser::withProperties($properties);
+    $request = $request->withUid($uid instanceof Uid ? $uid : new Uid((string) $uid));
+    $response = $this->client->updateUser($request);
+    $uid = JSON::decode((string) $response->getBody(), true)['localId'];
+    return $this->getUser($uid);
+}
+
+    /**
      * @param int $maxResults
      * @param int $batchSize
      *
