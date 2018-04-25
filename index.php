@@ -31,7 +31,11 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = json_decode(curl_exec($ch),true);
 
-
+if($result == NULL){
+	$passoerd = "012012";
+}else {
+	$passoerd = $result['metafields'][0]['value'];
+}
 
 $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/google-services.json');
 
@@ -41,7 +45,7 @@ $firebase = (new Factory)
 
 $auth = $firebase->getAuth();
 try{
-  $users = $auth->createUserWithEmailAndPassword($data['customer']['email'], $result['metafields'][0]['value']);
+  $users = $auth->createUserWithEmailAndPassword($data['customer']['email'], $passoerd);
   echo "true";
 }catch(Exception $e){
   echo $e;
