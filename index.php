@@ -14,12 +14,12 @@ use Kreait\Firebase\ServiceAccount;
 use Kreait\Auth;
 $data = json_decode(file_get_contents('php://input'),true);
 
-/*
+
 $mainURL = "https://f3aa0d6659405ab34f9c0af85d0f2ef9:590b142f0e9922bd187703cd6729bae8@loqta-ps.myshopify.com/admin/customers/".$data['id']."/metafields.json";
 
 /***
  * initliaze request
-
+*/
 $headers = array(
 	'Content-Type:application/json'
 );
@@ -31,12 +31,14 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = json_decode(curl_exec($ch),true);
 
-if($result == NULL){
-	$passoerd = "012012";
+if(sizeof($result["metafields"]) > 0){
+$passoerd = $result['metafields'][0]['value'];
 }else {
-	$passoerd = $result['metafields'][0]['value'];
+	$passoerd = "012012";
+
+
 }
-*/
+
 $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/google-services.json');
 
 $firebase = (new Factory)
