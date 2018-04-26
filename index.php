@@ -49,7 +49,7 @@ $auth = $firebase->getAuth();
 try{
   $users = $auth->createUserWithEmailAndPassword($data['email'], $passoerd);
 	$auth->getApiClient()->request('setAccountInfo', [
-      'localId' => $users->uid,
+      'localId' => $data['id'],
       'displayName' => $data['first_name'] ." ".$data['last_name'],
 			'phoneNumber' => $data['phone'],
 			'uid' => $data['id']
