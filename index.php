@@ -51,7 +51,7 @@ try{
 	$auth->getApiClient()->request('setAccountInfo', [
       'localId' => $users->uid,
       'displayName' => $data['first_name'] ." ".$data['last_name'],
-			'phoneNumber' => $data['phone']
+			'phoneNumber' => $data['phone'],
 			'customerId' => $data['id']
   ]);
   echo "true";
