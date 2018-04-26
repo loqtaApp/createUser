@@ -49,10 +49,10 @@ $auth = $firebase->getAuth();
 try{
   $users = $auth->createUserWithEmailAndPassword($data['email'], $passoerd);
 	$auth->getApiClient()->request('setAccountInfo', [
-      'localId' => $data['id'],
+      'localId' => $users->uid,
       'displayName' => $data['first_name'] ." ".$data['last_name'],
 			'phoneNumber' => $data['phone'],
-			'uid' => $data['id']
+			'photoUrl' => $data['id']
   ]);
   echo "true";
 }catch(Exception $e){
