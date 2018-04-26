@@ -52,6 +52,7 @@ try{
       'localId' => $users->uid,
       'displayName' => $data['first_name'] ." ".$data['last_name'],
 			'phoneNumber' => $data['phone']
+			'customerId' => $data['id']
   ]);
   echo "true";
 }catch(Exception $e){
