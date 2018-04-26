@@ -48,13 +48,21 @@ $firebase = (new Factory)
 $auth = $firebase->getAuth();
 try{
   $users = $auth->createUserWithEmailAndPassword($data['email'], $passoerd);
-	$auth->getApiClient()->request('setAccountInfo', [
-      'localId' => $users->uid,
-      'displayName' => $data['first_name'] ." ".$data['last_name'],
-			'phoneNumber' => $data['phone'],
-			'photoUrl' => $data['id']
-  ]);
-  echo "true";
+
+	$db = $firebase->getDatabase();
+
+	$postData =  array(
+		 'customer_id' => $data['id'],
+		 'first_name'=> $data['first_name'],
+		 'last_name' => $data['last_name'],
+		 'phone' => $data['phone'],
+		 'country' => ''
+	);
+	$db->getReference('users')->set($users->uid);
+
+	$db->getReference('users/' . $users->uid)->set($postData);
+
+	echo "true";
 }catch(Exception $e){
   echo $e;
 }
