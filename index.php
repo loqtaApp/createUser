@@ -50,7 +50,7 @@ try{
   $users = $auth->createUserWithEmailAndPassword($data['email'], $passoerd);
 	$auth->getApiClient()->request('setAccountInfo', [
       'localId' => $users->uid,
-      'displayName' => $data['first_name'] +" "+$data['last_name'],
+      'displayName' => $data['first_name'] ." ".$data['last_name'],
 			'phoneNumber' => $data['phone']
   ]);
   echo "true";
