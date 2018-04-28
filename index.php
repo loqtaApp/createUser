@@ -13,7 +13,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Auth;
 $data = json_decode(file_get_contents('php://input'),true);
-var_dump($data);
+var_dump(file_get_contents('php://input'));
 die();
 
 $mainURL = "https://f3aa0d6659405ab34f9c0af85d0f2ef9:590b142f0e9922bd187703cd6729bae8@loqta-ps.myshopify.com/admin/customers/".$data['id']."/metafields.json";
