@@ -1,9 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 
 header('Content-Type: application/json');
-error_reporting(E_ALL);
+error_reporting(0);
 //initialize request  to create order with wehook
 
 
@@ -12,9 +10,7 @@ require __DIR__.'/vendor/autoload.php';
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Auth;
-$data = json_decode(json_decode(file_get_contents('php://input'),true),true);
-var_dump($data);
-die();
+$data = json_decode(file_get_contents('php://input'),true);
 
 $mainURL = "https://f3aa0d6659405ab34f9c0af85d0f2ef9:590b142f0e9922bd187703cd6729bae8@loqta-ps.myshopify.com/admin/customers/".$data['id']."/metafields.json";
 
@@ -48,27 +44,27 @@ $auth = $firebase->getAuth();
 try{
   $users = $auth->createUserWithEmailAndPassword($data['email'], $passoerd);
 
+	//create user or update on firebase
+
+	$db = $firebase->getDatabase();
+
+	$postData =  array(
+		'customer_id' => $data['id'],
+		'first_name'=> $data['first_name'],
+		'last_name' => $data['last_name'],
+		'orders_count' => $data['orders_count'],
+		'phone' => $data['phone'],
+		'country' => ''
+	);
+//	$db->getReference('users/')->push($users->uid)->set($users->uid);
+
+	$db->getReference('users/' . $users->uid)->set($postData);
+
+	 echo "true";
 
 }catch(Exception $e){
   echo $e;
 }
-try{
-$db = $firebase->getDatabase();
 
-$postData =  array(
-	 'customer_id' => $data['id'],
-	 'first_name'=> $data['first_name'],
-	 'last_name' => $data['last_name'],
-	 'phone' => $data['phone'],
-	 'country' => ''
-);
-$db->getReference('users')->set($users->uid);
-
-$db->getReference('users/' . $users->uid)->set($postData);
-	echo "true";
-}
-catch(Exception $e){
-  echo $e;
-}
 
 ?>
