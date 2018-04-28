@@ -54,6 +54,7 @@ try{
 		'last_name' => $data['last_name'],
 		'orders_count' => $data['orders_count'],
 		'phone' => $data['phone'],
+		'email' => $data['email'],
 		'country' => ''
 	);
 //	$db->getReference('users/')->push($users->uid)->set($users->uid);
