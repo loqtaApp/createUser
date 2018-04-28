@@ -31,12 +31,10 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = json_decode(curl_exec($ch),true);
 
+$passoerd = "012012";
+
 if(sizeof($result["metafields"]) > 0){
 $passoerd = $result['metafields'][0]['value'];
-}else {
-	$passoerd = "012012";
-
-
 }
 
 $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/google-services.json');
@@ -49,25 +47,27 @@ $auth = $firebase->getAuth();
 try{
   $users = $auth->createUserWithEmailAndPassword($data['email'], $passoerd);
 
-	$db = $firebase->getDatabase();
 
-	$postData =  array(
-		 'customer_id' => $data['id'],
-		 'first_name'=> $data['first_name'],
-		 'last_name' => $data['last_name'],
-		 'phone' => $data['phone'],
-		 'country' => ''
-	);
-	$db->getReference('users')->set($users->uid);
-
-	$db->getReference('users/' . $users->uid)->set($postData);
-
-	echo "true";
 }catch(Exception $e){
   echo $e;
 }
+try{
+$db = $firebase->getDatabase();
 
+$postData =  array(
+	 'customer_id' => $data['id'],
+	 'first_name'=> $data['first_name'],
+	 'last_name' => $data['last_name'],
+	 'phone' => $data['phone'],
+	 'country' => ''
+);
+$db->getReference('users')->set($users->uid);
 
-
+$db->getReference('users/' . $users->uid)->set($postData);
+	echo "true";
+}
+catch(Exception $e){
+  echo $e;
+}
 
 ?>
