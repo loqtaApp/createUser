@@ -12,7 +12,7 @@ require __DIR__.'/vendor/autoload.php';
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Auth;
-$data = json_decode(file_get_contents('php://input'),true);
+$data = json_decode(json_decode(file_get_contents('php://input'),true),true);
 var_dump(file_get_contents('php://input'));
 die();
 
