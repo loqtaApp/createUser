@@ -45,8 +45,14 @@ try{
   $users = $auth->createUserWithEmailAndPassword($data['email'], $passoerd);
 
 	//create user or update on firebase
+	$country = '';
+	$city = '';
 
 	$db = $firebase->getDatabase();
+	if(is_array($data['addresses']) && sizeof($data['addresses'])>0){
+		$country = $data['addresses'][0]['country'];
+		$city = $data['addresses'][0]['city'];
+	}
 
 	$postData =  array(
 		'customer_id' => $data['id'],
@@ -55,7 +61,8 @@ try{
 		'orders_count' => $data['orders_count'],
 		'phone' => $data['phone'],
 		'email' => $data['email'],
-		'country' => ''
+		'country' => $country,
+		'city' => $city
 	);
 //	$db->getReference('users/')->push($users->uid)->set($users->uid);
 
