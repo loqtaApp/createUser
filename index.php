@@ -4,7 +4,6 @@ header('Content-Type: application/json');
 error_reporting(0);
 //initialize request  to create order with wehook
 
-
 require __DIR__.'/vendor/autoload.php';
 
 use Kreait\Firebase\Factory;
@@ -62,7 +61,8 @@ try{
 		'phone' => $data['phone'],
 		'email' => $data['email'],
 		'country' => $country,
-		'city' => $city
+		'city' => $city,
+		'wataniaDiscount' => ($data['orders_count'] >= 1)? fasle:true
 	);
 //	$db->getReference('users/')->push($users->uid)->set($users->uid);
 
