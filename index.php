@@ -53,6 +53,11 @@ try{
 		$city = $data['addresses'][0]['city'];
 	}
 
+	//	$db->getReference('users/')->push($users->uid)->set($users->uid);
+	$reference = $db->getReference('users/' . $users->uid) ;
+	$snapshot = $reference->getSnapshot();
+	$value = $snapshot->getValue();
+
 	$postData =  array(
 		'customer_id' => $data['id'],
 		'first_name'=> $data['first_name'],
@@ -62,9 +67,9 @@ try{
 		'email' => $data['email'],
 		'country' => $country,
 		'city' => $city,
-		'wataniaDiscount' => ($data['orders_count'] >= 1)? fasle:true
+		'wataniaDiscount' => ($value['wataniaDiscount'] != NULL || $value['wataniaDiscount'] == true)? fasle:true
 	);
-//	$db->getReference('users/')->push($users->uid)->set($users->uid);
+
 
 	$db->getReference('users/' . $users->uid)->set($postData);
 
