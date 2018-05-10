@@ -67,7 +67,7 @@ try{
 		'email' => $data['email'],
 		'country' => $country,
 		'city' => $city,
-		'wataniaDiscount' => ( (!isset($value['wataniaDiscount'])) || $value['wataniaDiscount'] == true)? fasle:true
+		'wataniaDiscount' => ( (!isset($value['wataniaDiscount'])) || $value['wataniaDiscount'] == true)? false:true
 	);
 
 
