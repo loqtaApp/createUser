@@ -62,7 +62,7 @@ try{
 
 	 }
 
-  $userRef = $db->getReference('users/' . $users->uid.'/popupFlag').set(true);
+   $db->getReference('users/' . $users->uid.'/popupFlag').set(true);
 
 	 echo json_encode($result);
 
