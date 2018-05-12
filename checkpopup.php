@@ -55,6 +55,7 @@ try{
 	 if($checkwatan && $checkShowPopupBefore && $value['popupFlag']){
 		 $result['status'] = true;
 		 $result['image'] = $value['popupImage'];
+     $result['discountCode'] = $value['discountCode'];
 
 	 }else{
 		 $result['status'] = false;
