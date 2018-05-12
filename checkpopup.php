@@ -47,7 +47,7 @@ try{
 
 	//check if have notified Before
 
-	 $checkShowPopupBefore = ((!isset($userValue['popupFlag'])) || $userValue['popupFlag'] == true)? true:false ;
+	 $checkShowPopupBefore = ((!isset($userValue['popupFlag'])) || $userValue['popupFlag'] == false)? true:false ;
 
 	 // check watania code
 
