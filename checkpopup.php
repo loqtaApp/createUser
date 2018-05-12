@@ -1,5 +1,4 @@
 <?php
-
 header('Content-Type: application/json');
 error_reporting(E_ALL);
 //initialize request  to create order with wehook
@@ -10,6 +9,9 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Auth;
 $data = json_decode(file_get_contents('php://input'),true);
+var_dump($data);
+die();
+if(sizeof($data) > 0){
 $checkwatan = preg_match("/^056/", $data['mobile']);
 
 
@@ -66,6 +68,6 @@ try{
 }catch(Exception $e){
   echo $e;
 }
-
+}
 
 ?>
