@@ -1,8 +1,4 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST,OPTIONS');
-header('Cache-Control: no-cache');
-header('Pragma: no-cache');
 header('Content-Type: application/json');
 error_reporting(0);
 //initialize request  to create order with wehook
