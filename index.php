@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-error_reporting(0);
+error_reporting(E_ALL);
 //initialize request  to create order with wehook
 
 require __DIR__ . '/vendor/autoload.php';
@@ -10,8 +10,8 @@ use Kreait\Firebase\ServiceAccount;
 use Kreait\Auth;
 
 $resultAfterAddUser = array();
+$resultAfterAddUser['status'] = false;
 
-if(isset(file_get_contents('php://input') )){
 $data = json_decode(file_get_contents('php://input'), true);
 
 $mainURL = "https://f3aa0d6659405ab34f9c0af85d0f2ef9:590b142f0e9922bd187703cd6729bae8@loqta-ps.myshopify.com/admin/customers/" . $data['id'] . "/metafields.json";
@@ -78,6 +78,6 @@ try {
 } catch (Exception $e) {
     $resultAfterAddUser['status'] = false;
 }
-}
+
         echo json_encode($resultAfterAddUser);
 ?>
