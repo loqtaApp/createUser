@@ -8,7 +8,9 @@ require __DIR__ . '/vendor/autoload.php';
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Auth;
+$resultAfterAddUser = array();
 
+try {
 $data = json_decode(file_get_contents('php://input'), true);
 
 $mainURL = "https://f3aa0d6659405ab34f9c0af85d0f2ef9:590b142f0e9922bd187703cd6729bae8@loqta-ps.myshopify.com/admin/customers/" . $data['id'] . "/metafields.json";
@@ -28,7 +30,6 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = json_decode(curl_exec($ch), true);
 
 $passoerd = "012012";
-$resultAfterAddUser = array();
 if (sizeof($result["metafields"]) > 0) {
     $passoerd = $result['metafields'][0]['value'];
 }
@@ -74,6 +75,9 @@ try {
     $db->getReference('users/' . $users->uid)->set($postData);
     $resultAfterAddUser['status'] = true;
 } catch (Exception $e) {
+    $resultAfterAddUser['status'] = false;
+}
+}catch (Exception $e) {
     $resultAfterAddUser['status'] = false;
 }
         echo json_encode($resultAfterAddUser);
