@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-error_reporting(E_ALL);
+error_reporting(0);
 //initialize request  to create order with wehook
 
 require __DIR__ . '/vendor/autoload.php';
